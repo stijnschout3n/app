@@ -1,3 +1,5 @@
+import 'package:app/archive/crm_archived.dart';
+import 'package:app/crm/crm.dart';
 import 'package:flutter/material.dart';
 import 'package:app/services/services.dart';
 import 'package:flutter/rendering.dart';
@@ -25,10 +27,13 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
     TextEditingController _housenumberController = TextEditingController(text: widget.customer.housenumber);
     TextEditingController _zipcodeController = TextEditingController(text: widget.customer.zipcode);
     TextEditingController _townController = TextEditingController(text: widget.customer.town);
+    TextEditingController _notesController = TextEditingController(text: widget.customer.notes);
 
     _submitForm() {
       if (_formKey.currentState!.validate()) {
         Customer c = Customer();
+        c.fid = widget.customer.fid;
+        c.uid = widget.customer.uid;
 
         c.firstname = _firstnameController.text;
         c.lastname = _lastnameController.text;
@@ -38,10 +43,19 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
         c.housenumber = _housenumberController.text;
         c.zipcode = _zipcodeController.text;
         c.town = _townController.text;
+        c.notes = _notesController.text;
+
+        FirestoreService().saveCustomer(c);
 
         // If the form passes validation, display a Snackbar.
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registration sent')));
-        Navigator.pop(context);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => CrmScreen(),
+          ),
+          (route) => false,
+        );
       }
     }
 
@@ -68,6 +82,7 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
           ],
         ),
         body: Padding(
+            //todo add register visit screen
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -76,6 +91,15 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    //notes
+                    TextFormField(
+                      readOnly: !switchstatus,
+                      keyboardType: TextInputType.multiline,
+                      controller: _notesController,
+                      decoration: InputDecoration(labelText: "Enter notes"),
+                      maxLines: 10,
+                    ),
+
                     //firstname
                     TextFormField(
                       readOnly: !switchstatus,
@@ -88,9 +112,6 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                         }
                         return null;
                       },
-                      //to place at note
-                      //maxLines: null,
-                      //expands: true,
                     ),
                     //lastname
                     TextFormField(

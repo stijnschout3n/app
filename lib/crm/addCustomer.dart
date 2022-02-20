@@ -249,7 +249,7 @@ class _addCustomerScreenState extends State<addCustomerScreen> {
                             top: 16,
                           ),
                           child: ElevatedButton(
-                            onPressed: _submitForm,
+                            onPressed: _submitForm(),
                             child: Text('Register'),
                           ),
                         ),

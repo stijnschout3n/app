@@ -9,9 +9,7 @@ class FirestoreService {
 
   /// Reads all documments from the topics collection
   Future<List<Customer>> getCustomersRelatedToUser() async {
-    var ref = _db
-        .collection('customers')
-        .where('uid', isEqualTo: AuthService().user!.uid.toString());
+    var ref = _db.collection('customers').where('uid', isEqualTo: AuthService().user!.uid.toString());
     var snapshot = await ref.get();
     var data = snapshot.docs.map((s) => s.data());
     var customers = data.map((d) => Customer.fromJson(d));
@@ -26,5 +24,7 @@ class FirestoreService {
   }
 
   /// Saves an existing customer to the firestore database
-  Future<void> saveCustomer(Customer customer) async {}
+  Future<void> saveCustomer(Customer customer) async {
+    _db.collection('customers').doc(customer.fid).set(customer.toJson());
+  }
 }

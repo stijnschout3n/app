@@ -5,14 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app/services/services.dart';
 import 'package:app/shared/shared.dart';
 
-class CrmScreen extends StatefulWidget {
-  const CrmScreen({Key? key}) : super(key: key);
+class CrmScreenArchived extends StatefulWidget {
+  const CrmScreenArchived({Key? key}) : super(key: key);
 
   @override
-  State<CrmScreen> createState() => _CrmScreenState();
+  State<CrmScreenArchived> createState() => _CrmScreenArchivedState();
 }
 
-class _CrmScreenState extends State<CrmScreen> {
+class _CrmScreenArchivedState extends State<CrmScreenArchived> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Customer>>(
@@ -35,15 +35,10 @@ class _CrmScreenState extends State<CrmScreen> {
                   Padding(
                     padding: EdgeInsets.only(right: 20.0),
                     child: GestureDetector(
-                        onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CrmScreen()))
-                            .then((value) => setState(() {})),
-                        child: Row(children: <Widget>[
-                          Text('Add'),
-                          Icon(Icons.contacts)
-                        ])),
+                        onTap: () =>
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CrmScreenArchived()))
+                                .then((value) => setState(() {})),
+                        child: Row(children: <Widget>[Text('Add'), Icon(Icons.contacts)])),
                   )
                 ],
               ),
@@ -70,18 +65,10 @@ class _CrmScreenState extends State<CrmScreen> {
     );
   }
 
-  List<DataRow> getRows(List<Customer> customers) =>
-      customers.map((Customer customer) {
-        final cells = [
-          customer.firstname,
-          customer.lastname,
-          customer.street,
-          customer.phone,
-          customer.email
-        ];
+  List<DataRow> getRows(List<Customer> customers) => customers.map((Customer customer) {
+        final cells = [customer.firstname, customer.lastname, customer.street, customer.phone, customer.email];
         return DataRow(cells: getCells(cells));
       }).toList();
 
-  List<DataCell> getCells(List<dynamic> cells) =>
-      cells.map((data) => DataCell(Text('$data'))).toList();
+  List<DataCell> getCells(List<dynamic> cells) => cells.map((data) => DataCell(Text('$data'))).toList();
 }

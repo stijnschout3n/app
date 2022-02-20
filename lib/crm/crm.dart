@@ -34,15 +34,10 @@ class _CrmScreenState extends State<CrmScreen> {
                   Padding(
                     padding: EdgeInsets.only(right: 20.0),
                     child: GestureDetector(
-                        onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => addCustomerScreen()))
-                            .then((value) => setState(() {})),
-                        child: Row(children: <Widget>[
-                          Text('Add'),
-                          Icon(Icons.contacts)
-                        ])),
+                        onTap: () =>
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => addCustomerScreen()))
+                                .then((value) => setState(() {})),
+                        child: Row(children: <Widget>[Text('Add'), Icon(Icons.contacts)])),
                   )
                 ],
               ),
@@ -74,8 +69,7 @@ class _CrmScreenState extends State<CrmScreen> {
               ),
             );
           } else {
-            return const Text(
-                'No Customers found in Firestore. Check database');
+            return const Text('No Customers found in Firestore. Check database');
           }
         });
   }
@@ -95,11 +89,7 @@ class CustomerItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      viewCustomerScreen(customer: customer)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => viewCustomerScreen(customer: customer)));
         },
         child: Container(
           height: 60,
