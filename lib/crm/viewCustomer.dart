@@ -260,8 +260,7 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
   }
 
   void _deleteCustomer() {
-    Customer c = Customer();
-    FirestoreService().editCustomer(c, delete: true);
+    FirestoreService().editCustomer(widget.customer, delete: true);
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
