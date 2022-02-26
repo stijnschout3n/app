@@ -45,7 +45,7 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
         c.town = _townController.text;
         c.notes = _notesController.text;
 
-        FirestoreService().saveCustomer(c);
+        FirestoreService().editCustomer(c);
 
         // If the form passes validation, display a Snackbar.
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registration sent')));
@@ -76,6 +76,11 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                       });
                     },
                   ),
+                  ElevatedButton(
+                      onPressed: () {
+                        showDialog(context: context, builder: (context) => _deletePopupDialog(context));
+                      },
+                      child: Row(children: const <Widget>[Text('Delete'), Icon(Icons.delete)]))
                 ],
               ),
             )
@@ -197,7 +202,7 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                       readOnly: !switchstatus,
                       keyboardType: TextInputType.streetAddress,
                       controller: _townController,
-                      decoration: InputDecoration(labelText: "Housenumber"),
+                      decoration: InputDecoration(labelText: "Town or city"),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please fill in a town or city';
@@ -225,5 +230,44 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                 ),
               ),
             )));
+  }
+
+  Widget _deletePopupDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Warning'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Are you sure you want to delete ${widget.customer.firstname}?"),
+        ],
+      ),
+      actions: <Widget>[
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('No'),
+            ),
+            Spacer(),
+            ElevatedButton(onPressed: _deleteCustomer, child: const Text('Yes')),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void _deleteCustomer() {
+    Customer c = Customer();
+    FirestoreService().editCustomer(c, delete: true);
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => CrmScreen(),
+      ),
+      (route) => false,
+    );
   }
 }

@@ -23,8 +23,12 @@ class FirestoreService {
     doc.set(customer.toJson());
   }
 
-  /// Saves an existing customer to the firestore database
-  Future<void> saveCustomer(Customer customer) async {
-    _db.collection('customers').doc(customer.fid).set(customer.toJson());
+  /// Edits an existing customer to the firestore database
+  Future<void> editCustomer(Customer customer, {bool delete = false}) async {
+    if (delete) {
+      _db.collection('customers').doc(customer.fid).delete();
+    } else {
+      _db.collection('customers').doc(customer.fid).set(customer.toJson());
+    }
   }
 }
