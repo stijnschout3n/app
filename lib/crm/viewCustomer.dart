@@ -3,6 +3,7 @@ import 'package:app/crm/crm.dart';
 import 'package:flutter/material.dart';
 import 'package:app/services/services.dart';
 import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class viewCustomerScreen extends StatefulWidget {
   const viewCustomerScreen({Key? key, required this.customer}) : super(key: key);
@@ -88,146 +89,158 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
         ),
         body: Padding(
             //todo add register visit screen
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    //notes
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.multiline,
-                      controller: _notesController,
-                      decoration: InputDecoration(labelText: "Enter notes"),
-                      maxLines: 10,
+              child: Column(
+                children: [
+                  Row(children: [
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(FontAwesomeIcons.ad),
+                      label: Text("hi"),
+                      style: ElevatedButton.styleFrom(fixedSize: (const Size(100, 50))),
                     ),
+                  ]),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        //notes
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.multiline,
+                          controller: _notesController,
+                          decoration: InputDecoration(labelText: "Enter notes"),
+                          maxLines: 10,
+                        ),
 
-                    //firstname
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.name,
-                      controller: _firstnameController,
-                      decoration: InputDecoration(labelText: "First name"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a first name';
-                        }
-                        return null;
-                      },
-                    ),
-                    //lastname
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.name,
-                      controller: _lastnameController,
-                      decoration: InputDecoration(labelText: "Last name"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a last name';
-                        }
-                        return null;
-                      },
-                    ),
-                    //email
-                    TextFormField(
-                        readOnly: !switchstatus,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        decoration: InputDecoration(labelText: "Email"),
-                        validator: (value) {
-                          if (RegExp(
-                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                              .hasMatch(value.toString())) {
+                        //firstname
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.name,
+                          controller: _firstnameController,
+                          decoration: InputDecoration(labelText: "First name"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a first name';
+                            }
                             return null;
-                          }
-                          return 'Please fill in a valid email';
-                        }),
-                    //phone
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.phone,
-                      controller: _phoneController,
-                      decoration: InputDecoration(labelText: "Phone"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a phone number';
-                        }
-                        return null;
-                      },
-                    ),
-                    //street
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.text,
-                      controller: _streetController,
-                      decoration: InputDecoration(labelText: "Street"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a street name';
-                        }
-                        return null;
-                      },
-                    ),
-                    //housenumber
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.streetAddress,
-                      controller: _housenumberController,
-                      decoration: InputDecoration(labelText: "Housenumber"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a housenumber';
-                        }
-                        return null;
-                      },
-                    ),
-                    //zipcode
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.streetAddress,
-                      controller: _zipcodeController,
-                      decoration: InputDecoration(labelText: "Zipcode"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a zipcode';
-                        }
-                        return null;
-                      },
-                    ),
-                    //town
-                    TextFormField(
-                      readOnly: !switchstatus,
-                      keyboardType: TextInputType.streetAddress,
-                      controller: _townController,
-                      decoration: InputDecoration(labelText: "Town or city"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill in a town or city';
-                        }
-                        return null;
-                      },
-                    ),
-                    Row(
-                      children: [
-                        if (switchstatus)
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: 16,
+                          },
+                        ),
+                        //lastname
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.name,
+                          controller: _lastnameController,
+                          decoration: InputDecoration(labelText: "Last name"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a last name';
+                            }
+                            return null;
+                          },
+                        ),
+                        //email
+                        TextFormField(
+                            readOnly: !switchstatus,
+                            keyboardType: TextInputType.emailAddress,
+                            controller: _emailController,
+                            decoration: InputDecoration(labelText: "Email"),
+                            validator: (value) {
+                              if (RegExp(
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                  .hasMatch(value.toString())) {
+                                return null;
+                              }
+                              return 'Please fill in a valid email';
+                            }),
+                        //phone
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.phone,
+                          controller: _phoneController,
+                          decoration: InputDecoration(labelText: "Phone"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a phone number';
+                            }
+                            return null;
+                          },
+                        ),
+                        //street
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.text,
+                          controller: _streetController,
+                          decoration: InputDecoration(labelText: "Street"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a street name';
+                            }
+                            return null;
+                          },
+                        ),
+                        //housenumber
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.streetAddress,
+                          controller: _housenumberController,
+                          decoration: InputDecoration(labelText: "Housenumber"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a housenumber';
+                            }
+                            return null;
+                          },
+                        ),
+                        //zipcode
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.streetAddress,
+                          controller: _zipcodeController,
+                          decoration: InputDecoration(labelText: "Zipcode"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a zipcode';
+                            }
+                            return null;
+                          },
+                        ),
+                        //town
+                        TextFormField(
+                          readOnly: !switchstatus,
+                          keyboardType: TextInputType.streetAddress,
+                          controller: _townController,
+                          decoration: InputDecoration(labelText: "Town or city"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please fill in a town or city';
+                            }
+                            return null;
+                          },
+                        ),
+                        Row(
+                          children: [
+                            if (switchstatus)
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 16,
+                                  ),
+                                  child: ElevatedButton(
+                                    onPressed: _submitForm,
+                                    child: Text('Update'),
+                                  ),
+                                ),
                               ),
-                              child: ElevatedButton(
-                                onPressed: _submitForm,
-                                child: Text('Update'),
-                              ),
-                            ),
-                          ),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             )));
   }
