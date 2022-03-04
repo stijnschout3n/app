@@ -7,7 +7,7 @@ import 'package:app/services/models.dart';
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  /// Reads all documments from the topics collection
+  /// Reads all documents from the customers collection
   Future<List<Customer>> getCustomersRelatedToUser() async {
     var ref = _db.collection('customers').where('uid', isEqualTo: AuthService().user!.uid.toString());
     var snapshot = await ref.get();
@@ -30,5 +30,11 @@ class FirestoreService {
     } else {
       _db.collection('customers').doc(customer.fid).set(customer.toJson());
     }
+  }
+
+  Future<void> addProject(Project project) async {
+    DocumentReference doc = _db.collection('project').doc();
+    project.fid = doc.id;
+    doc.set(project.toJson());
   }
 }

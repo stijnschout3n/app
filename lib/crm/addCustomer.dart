@@ -35,33 +35,6 @@ class _addCustomerScreenState extends State<addCustomerScreen> {
   final TextEditingController _zipcodeController = TextEditingController();
   final TextEditingController _townController = TextEditingController();
 
-  _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      Customer c = Customer();
-
-      c.uid = AuthService().user!.uid.toString();
-
-      c.firstname = _firstnameController.text;
-      c.lastname = _lastnameController.text;
-      c.email = _emailController.text;
-      c.phone = _phoneController.text;
-      c.street = _streetController.text;
-      c.housenumber = _housenumberController.text;
-      c.zipcode = _zipcodeController.text;
-      c.town = _townController.text;
-
-      FirestoreService().addCustomer(c);
-
-      // If the form passes validation, display a Snackbar.
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registration sent')));
-      Navigator.pop(context);
-    }
-  }
-
-  _nextFocus(FocusNode focusNode) {
-    FocusScope.of(context).requestFocus(focusNode);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,9 +205,6 @@ class _addCustomerScreenState extends State<addCustomerScreen> {
                       }
                       return null;
                     },
-                    onFieldSubmitted: (String value) {
-                      _submitForm();
-                    },
                     decoration: InputDecoration(
                       hintText: 'Enter a town or city',
                       labelText: 'City or Town',
@@ -249,7 +219,7 @@ class _addCustomerScreenState extends State<addCustomerScreen> {
                             top: 16,
                           ),
                           child: ElevatedButton(
-                            onPressed: _submitForm(),
+                            onPressed: () => _submitForm(),
                             child: Text('Register'),
                           ),
                         ),
@@ -263,5 +233,32 @@ class _addCustomerScreenState extends State<addCustomerScreen> {
         ),
       ),
     );
+  }
+
+  _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      Customer c = Customer();
+
+      c.uid = AuthService().user!.uid.toString();
+
+      c.firstname = _firstnameController.text;
+      c.lastname = _lastnameController.text;
+      c.email = _emailController.text;
+      c.phone = _phoneController.text;
+      c.street = _streetController.text;
+      c.housenumber = _housenumberController.text;
+      c.zipcode = _zipcodeController.text;
+      c.town = _townController.text;
+
+      FirestoreService().addCustomer(c);
+
+      // If the form passes validation, display a Snackbar.
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registration sent')));
+      Navigator.pop(context);
+    }
+  }
+
+  _nextFocus(FocusNode focusNode) {
+    FocusScope.of(context).requestFocus(focusNode);
   }
 }

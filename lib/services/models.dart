@@ -1,17 +1,33 @@
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 part 'models.g.dart';
 
 @JsonSerializable()
-class Visit {
+class Project {
+  String customer;
+  String fid;
+  String label;
   String cause;
-  String timestamp;
+  String timeCreated;
+  String timeCompleted;
+  bool invoiceSend;
+  String invoiceReminders;
+  double hours;
 
-  Visit({
+  Project({
+    this.customer = '',
+    this.fid = '',
     this.cause = '',
-    this.timestamp = '',
+    this.label = '',
+    this.timeCreated = '',
+    this.timeCompleted = '',
+    this.invoiceSend = false,
+    this.invoiceReminders = '',
+    this.hours = 0.0,
   });
-  factory Visit.fromJson(Map<String, dynamic> json) => _$VisitFromJson(json);
-  Map<String, dynamic> toJson() => _$VisitToJson(this);
+  factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
+  Map<String, dynamic> toJson() => _$ProjectToJson(this);
 }
 
 @JsonSerializable()
@@ -27,22 +43,20 @@ class Customer {
   String zipcode;
   String town;
   String notes;
-  List<Visit> visits;
 
-  Customer(
-      {this.fid = '',
-      this.firstname = '',
-      this.lastname = '',
-      this.uid = '',
-      this.email = '',
-      this.phone = '',
-      this.street = '',
-      this.housenumber = '',
-      this.zipcode = '',
-      this.town = '',
-      this.notes = '',
-      this.visits = const []});
-  factory Customer.fromJson(Map<String, dynamic> json) =>
-      _$CustomerFromJson(json);
+  Customer({
+    this.fid = '',
+    this.firstname = '',
+    this.lastname = '',
+    this.uid = '',
+    this.email = '',
+    this.phone = '',
+    this.street = '',
+    this.housenumber = '',
+    this.zipcode = '',
+    this.town = '',
+    this.notes = '',
+  });
+  factory Customer.fromJson(Map<String, dynamic> json) => _$CustomerFromJson(json);
   Map<String, dynamic> toJson() => _$CustomerToJson(this);
 }

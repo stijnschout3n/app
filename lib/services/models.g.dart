@@ -6,14 +6,28 @@ part of 'models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Visit _$VisitFromJson(Map<String, dynamic> json) => Visit(
+Project _$ProjectFromJson(Map<String, dynamic> json) => Project(
+      customer: json['customer'] as String? ?? '',
+      fid: json['fid'] as String? ?? '',
       cause: json['cause'] as String? ?? '',
-      timestamp: json['timestamp'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      timeCreated: json['timeCreated'] as String? ?? '',
+      timeCompleted: json['timeCompleted'] as String? ?? '',
+      invoiceSend: json['invoiceSend'] as bool? ?? false,
+      invoiceReminders: json['invoiceReminders'] as String? ?? '',
+      hours: (json['hours'] as num?)?.toDouble() ?? 0.0,
     );
 
-Map<String, dynamic> _$VisitToJson(Visit instance) => <String, dynamic>{
+Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
+      'customer': instance.customer,
+      'fid': instance.fid,
+      'label': instance.label,
       'cause': instance.cause,
-      'timestamp': instance.timestamp,
+      'timeCreated': instance.timeCreated,
+      'timeCompleted': instance.timeCompleted,
+      'invoiceSend': instance.invoiceSend,
+      'invoiceReminders': instance.invoiceReminders,
+      'hours': instance.hours,
     };
 
 Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
@@ -28,10 +42,6 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
       zipcode: json['zipcode'] as String? ?? '',
       town: json['town'] as String? ?? '',
       notes: json['notes'] as String? ?? '',
-      visits: (json['visits'] as List<dynamic>?)
-              ?.map((e) => Visit.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
     );
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) => <String, dynamic>{
@@ -46,5 +56,4 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) => <String, dynamic>{
       'zipcode': instance.zipcode,
       'town': instance.town,
       'notes': instance.notes,
-      'visits': instance.visits,
     };

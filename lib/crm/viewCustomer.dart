@@ -1,4 +1,5 @@
 import 'package:app/archive/crm_archived.dart';
+import 'package:app/crm/addProject.dart';
 import 'package:app/crm/crm.dart';
 import 'package:flutter/material.dart';
 import 'package:app/services/services.dart';
@@ -88,7 +89,6 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
           ],
         ),
         body: Padding(
-            //todo add register visit screen
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -96,10 +96,11 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                 children: [
                   Row(children: [
                     ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(FontAwesomeIcons.ad),
-                      label: Text("hi"),
-                      style: ElevatedButton.styleFrom(fixedSize: (const Size(100, 50))),
+                      onPressed: () => Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => addProject(customer: widget.customer))),
+                      icon: Icon(FontAwesomeIcons.houseDamage),
+                      label: Text("Register"),
+                      style: ElevatedButton.styleFrom(fixedSize: (const Size(120, 50))),
                     ),
                   ]),
                   Form(
@@ -230,7 +231,7 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                                     top: 16,
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: _submitForm,
+                                    onPressed: () => _submitForm(),
                                     child: Text('Update'),
                                   ),
                                 ),
