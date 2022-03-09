@@ -1,23 +1,28 @@
 import 'package:app/archive/crm_archived.dart';
-import 'package:app/crm/addProject.dart';
+import 'package:app/crm/AddProject.dart';
+import 'package:app/crm/ViewProject.dart';
 import 'package:app/crm/crm.dart';
 import 'package:flutter/material.dart';
 import 'package:app/services/services.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class viewCustomerScreen extends StatefulWidget {
-  const viewCustomerScreen({Key? key, required this.customer}) : super(key: key);
+class ViewCustomerScreen extends StatefulWidget {
+  const ViewCustomerScreen({Key? key, required this.customer}) : super(key: key);
 
   final Customer customer;
 
   @override
-  State<viewCustomerScreen> createState() => _viewCustomerScreenState();
+  State<ViewCustomerScreen> createState() => _ViewCustomerScreenState();
 }
 
-class _viewCustomerScreenState extends State<viewCustomerScreen> {
+class _ViewCustomerScreenState extends State<ViewCustomerScreen> {
   bool switchstatus = false;
   final _formKey = GlobalKey<FormState>();
+
+  //to delete -> test project for the pdf printing
+
+  Project p = Project(cause: "this is the cause", label: "this is the label");
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +102,23 @@ class _viewCustomerScreenState extends State<viewCustomerScreen> {
                   Row(children: [
                     ElevatedButton.icon(
                       onPressed: () => Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => addProject(customer: widget.customer))),
+                          context, MaterialPageRoute(builder: (context) => AddProject(customer: widget.customer))),
                       icon: Icon(FontAwesomeIcons.houseDamage),
                       label: Text("Register"),
                       style: ElevatedButton.styleFrom(fixedSize: (const Size(120, 50))),
                     ),
+                    ElevatedButton.icon(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewProject(
+                                    project: p,
+                                    customer: widget.customer,
+                                  ))),
+                      icon: Icon(FontAwesomeIcons.houseDamage),
+                      label: Text("View"),
+                      style: ElevatedButton.styleFrom(fixedSize: (const Size(120, 50))),
+                    )
                   ]),
                   Form(
                     key: _formKey,

@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:json_annotation/json_annotation.dart';
 part 'models.g.dart';
 
+//todo add class UserProfile
+
 @JsonSerializable()
 class Project {
   String customer;
@@ -14,6 +16,7 @@ class Project {
   bool invoiceSend;
   String invoiceReminders;
   double hours;
+  //to add Status
 
   Project({
     this.customer = '',

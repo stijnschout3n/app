@@ -7,14 +7,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app/services/services.dart';
 import 'package:app/shared/shared.dart';
 
-class addCustomerScreen extends StatefulWidget {
-  addCustomerScreen({Key? key}) : super(key: key);
+class AddCustomerScreen extends StatefulWidget {
+  AddCustomerScreen({Key? key}) : super(key: key);
 
   @override
-  _addCustomerScreenState createState() => _addCustomerScreenState();
+  _AddCustomerScreenState createState() => _AddCustomerScreenState();
 }
 
-class _addCustomerScreenState extends State<addCustomerScreen> {
+class _AddCustomerScreenState extends State<AddCustomerScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final FocusNode _firstnameFocusNode = FocusNode();

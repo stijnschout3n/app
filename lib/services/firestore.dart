@@ -33,7 +33,7 @@ class FirestoreService {
   }
 
   Future<void> addProject(Project project) async {
-    DocumentReference doc = _db.collection('project').doc();
+    DocumentReference doc = _db.collection('projects').doc();
     project.fid = doc.id;
     doc.set(project.toJson());
   }

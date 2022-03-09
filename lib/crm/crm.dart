@@ -1,5 +1,5 @@
-import 'package:app/crm/addCustomer.dart';
-import 'package:app/crm/viewCustomer.dart';
+import 'package:app/crm/AddCustomer.dart';
+import 'package:app/crm/ViewCustomer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app/services/services.dart';
@@ -35,7 +35,7 @@ class _CrmScreenState extends State<CrmScreen> {
                     padding: EdgeInsets.only(right: 20.0),
                     child: GestureDetector(
                         onTap: () =>
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => addCustomerScreen()))
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddCustomerScreen()))
                                 .then((value) => setState(() {})),
                         child: Row(children: <Widget>[Text('Add'), Icon(Icons.contacts)])),
                   )
@@ -89,7 +89,7 @@ class CustomerItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => viewCustomerScreen(customer: customer)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewCustomerScreen(customer: customer)));
         },
         child: Container(
           height: 60,
