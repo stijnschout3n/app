@@ -41,6 +41,18 @@ class _ProjectPickerState extends State<ProjectPicker> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 5.0, color: Helpers().getColorBasedOnStatus(projects[index]))),
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Icon(Icons.house),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column()
+                          ],
+                        ),
                       ),
                     );
                   }),
