@@ -6,6 +6,28 @@ part 'models.g.dart';
 //todo add class UserProfile
 
 @JsonSerializable()
+class UserProfile {
+  String uid;
+  String firstName;
+  String lastName;
+  String street;
+  String housenumber;
+  String zipcode;
+  String town;
+
+  UserProfile(
+      {this.uid = '',
+      this.firstName = '',
+      this.lastName = '',
+      this.street = '',
+      this.housenumber = '',
+      this.zipcode = '',
+      this.town = ''});
+  factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
+}
+
+@JsonSerializable()
 class Project {
   String customer;
   String fid;
@@ -16,7 +38,7 @@ class Project {
   bool invoiceSend;
   String invoiceReminders;
   double hours;
-  //to add Status
+  String status;
 
   Project({
     this.customer = '',
@@ -28,6 +50,7 @@ class Project {
     this.invoiceSend = false,
     this.invoiceReminders = '',
     this.hours = 0.0,
+    this.status = '',
   });
   factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
   Map<String, dynamic> toJson() => _$ProjectToJson(this);

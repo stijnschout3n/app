@@ -1,5 +1,6 @@
 import 'package:app/archive/crm_archived.dart';
 import 'package:app/crm/AddProject.dart';
+import 'package:app/crm/ProjectPicker.dart';
 import 'package:app/crm/ViewProject.dart';
 import 'package:app/crm/crm.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,6 @@ class ViewCustomerScreen extends StatefulWidget {
 class _ViewCustomerScreenState extends State<ViewCustomerScreen> {
   bool switchstatus = false;
   final _formKey = GlobalKey<FormState>();
-
-  //to delete -> test project for the pdf printing
-
-  Project p = Project(cause: "this is the cause", label: "this is the label");
 
   @override
   Widget build(BuildContext context) {
@@ -109,16 +106,11 @@ class _ViewCustomerScreenState extends State<ViewCustomerScreen> {
                     ),
                     ElevatedButton.icon(
                       onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewProject(
-                                    project: p,
-                                    customer: widget.customer,
-                                  ))),
+                          context, MaterialPageRoute(builder: (context) => ProjectPicker(customer: widget.customer))),
                       icon: Icon(FontAwesomeIcons.houseDamage),
                       label: Text("View"),
                       style: ElevatedButton.styleFrom(fixedSize: (const Size(120, 50))),
-                    )
+                    ),
                   ]),
                   Form(
                     key: _formKey,

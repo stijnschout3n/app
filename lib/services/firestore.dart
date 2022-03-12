@@ -32,9 +32,19 @@ class FirestoreService {
     }
   }
 
+  /// Add a new project to the firestore database
   Future<void> addProject(Project project) async {
     DocumentReference doc = _db.collection('projects').doc();
     project.fid = doc.id;
     doc.set(project.toJson());
+  }
+
+  /// Reads all documents from the customers collection
+  Future<List<Project>> getProjectsRelatedToCustomer(Customer customer) async {
+    var ref = _db.collection('projects').where('customer', isEqualTo: customer.fid);
+    var snapshot = await ref.get();
+    var data = snapshot.docs.map((s) => s.data());
+    var projects = data.map((d) => Project.fromJson(d));
+    return projects.toList();
   }
 }

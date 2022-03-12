@@ -114,14 +114,7 @@ class CustomerItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    customer.firstname,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    customer.lastname,
+                    customer.firstname + " " + customer.lastname,
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
