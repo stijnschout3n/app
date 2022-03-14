@@ -36,21 +36,54 @@ class _ProjectPickerState extends State<ProjectPicker> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        height: 60,
+                        height: 120,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 5.0, color: Helpers().getColorBasedOnStatus(projects[index]))),
                         child: Row(
                           children: [
-                            const SizedBox(
+                            SizedBox(
                               width: 10,
                             ),
-                            Icon(Icons.house),
-                            const SizedBox(
+                            const Icon(
+                              Icons.house,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(
                               width: 10,
                             ),
-                            Column()
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              projects[index].label,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  width: 120,
+                                  child: ElevatedButton.icon(
+                                    onPressed: () => {},
+                                    icon: Icon(FontAwesomeIcons.adjust),
+                                    label: Text("Uren"),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 120,
+                                  child: ElevatedButton.icon(
+                                    onPressed: () => {},
+                                    icon: Icon(FontAwesomeIcons.bolt),
+                                    label: Text("Status"),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
