@@ -69,7 +69,15 @@ class _ProjectPickerState extends State<ProjectPicker> {
                                 SizedBox(
                                   width: 120,
                                   child: ElevatedButton.icon(
-                                    onPressed: () => {},
+                                    onPressed: () => {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return SimpleDialog(
+                                              title: Text("hi"),
+                                            );
+                                          })
+                                    },
                                     icon: Icon(FontAwesomeIcons.adjust),
                                     label: Text("Uren"),
                                   ),
