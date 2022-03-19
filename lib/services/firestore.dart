@@ -47,4 +47,16 @@ class FirestoreService {
     var projects = data.map((d) => Project.fromJson(d));
     return projects.toList();
   }
+
+  /// Streams a project object
+  Stream<Project> streamProject(Project project) {
+    return AuthService().userStream.switchMap((user) {
+      if (user != null) {
+        var ref = _db.collection('projects').doc(project.fid);
+        return ref.snapshots().map((doc) => Project.fromJson(doc.data()!));
+      } else {
+        return Stream.fromIterable([Project()]);
+      }
+    });
+  }
 }
